@@ -12,6 +12,7 @@ export const signInAction = (userState:Omit<UsersType['state'],'isSignedIn'>): U
     type: ACTION_TYPE.SIGN_IN,
     payload: {   //payload=データの塊
       isSignedIn: true,
+      role: userState.role,
       userId: userState.userId,
       userName: userState.userName
     }
@@ -24,6 +25,7 @@ export const signOutAction = () :UsersType['action'] => {
     type: ACTION_TYPE.SIGN_OUT,
     payload: {
       isSignedIn: false, //初期値に戻す
+      role: "",
       userId: "",
       userName: ""
     }
