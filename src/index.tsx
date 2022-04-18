@@ -1,19 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from 'react-dom';
+import {Provider} from "react-redux";
+import {createStore} from "./reducks/store/store";
+import {App} from './App';
+import {createBrowserHistory} from "history";
+import  {ConnectedRouter}  from 'connected-react-router' ;
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const history = createBrowserHistory();
+export const store = createStore(history);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(
+    // <React.StrictMode> //historyに何が入るか？
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <App/>
+      </ConnectedRouter>
+    </Provider>,
+  document.getElementById('root')// </React.StrictMode>,
+);
