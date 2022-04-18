@@ -11,9 +11,9 @@ export const store = createStore(history);
 ReactDOM.render(
     // <React.StrictMode> //historyに何が入るか？
     <Provider store={store}>
-      <ConnectedRouter history={history}>
+     <ConnectedRouter history={history}>
         <App/>
-      </ConnectedRouter>
+     </ConnectedRouter>
     </Provider>,
   document.getElementById('root')// </React.StrictMode>,
 );
