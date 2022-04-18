@@ -7,7 +7,7 @@ export const TextInput: React.FC<TextInputPropsType> = (
   {
     fullWidth = true,
     multiline = false,
-    required = true,
+    required = true,//必須項目
     rows = 1,
     type = "text",
     ...others

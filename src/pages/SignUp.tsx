@@ -1,10 +1,10 @@
-import { Eco } from "@material-ui/icons";
 import { ChangeEvent, useCallback, useState} from "react";
 import { TextInput , PrimaryButton} from "../components/UIkit";
+import {signUp} from "../reducks/users/operations"
 
 export const SignUp = () =>{
   //usernameのstate
-  const [username, setUsername] = useState("");
+  const [userName, setUsername] = useState("");
   //emailのstate
   const [email, setEmail] = useState("");
   //passwordのstate
@@ -34,7 +34,7 @@ export const SignUp = () =>{
       <div className="module-spacer--medium" aria-hidden="true"/>
       <TextInput
         label="ユーザー名"
-        value={username}
+        value={userName}
         onChange={inputUsername}
       />
       <TextInput
@@ -57,7 +57,7 @@ export const SignUp = () =>{
       />
       <div className="module-spacer--medium" aria-hidden="true"/>
       <div className="center">
-        <PrimaryButton label="アカウントを登録する" onClick={() => dispatch(signUp(username, email, password, confirmPassword))}/>
+        <PrimaryButton label="アカウントを登録する" onClick={() => dispatch(signUp(userName, email, password, confirmPassword))}/>
       </div>
     </div>
   )
