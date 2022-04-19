@@ -14,8 +14,8 @@ export type UsersType = {
 export type UsersStateType = {
   isSignedIn: boolean;
   role: string;
-  userId: string;
-  userName: string;
+  uid: string;
+  username: string;
 }
 
 export type UserActionType = {

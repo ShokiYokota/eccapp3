@@ -5,11 +5,11 @@ const usersSelector = (state:RootStateType) => state.users;
 
 export const getUserId = createSelector(
   [usersSelector],
-  state => state.userId
+  state => state.uid
 )
 
-export const getUserName = createSelector(
+export const getUsername = createSelector(
 
   [usersSelector],
-  state => state.userName
+  state => state.username
 )
