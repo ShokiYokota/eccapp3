@@ -6,7 +6,7 @@ import { ProductData } from '../reducks/products/types'
 import { useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import HTMLReactParser from 'html-react-parser'
-import { ImageSwiper, SizeTable } from '../components/Products/index'
+import { ImageSwiper, SizeTable } from '../components/products/index'
 import { useCallback } from 'react'
 import { push } from 'connected-react-router'
 import { addProductToCart } from 'reducks/users/operations'
@@ -79,7 +79,7 @@ export const ProductDetail = () => {
            <h2 className="u-text__headline">{product.name}</h2>
             <p className={classes.price}>{product.price.toLocaleString()}</p>
             <div className="module-spacer--extra-small" />
-            {/* <SizeTable addProduct={addProduct} sizes={product.sizes}></SizeTable> */}
+            <SizeTable addProduct={addProduct} sizes={product.sizes}></SizeTable>
             <div className="module-spacer--extra-small" />
             <p>{returnCodeToBr(product.description)}</p>
             <p></p>
