@@ -22,3 +22,4 @@ export type UserActionType = {
   type: keyof typeof ACTION_TYPE;
   payload: UsersStateType;
 }
+

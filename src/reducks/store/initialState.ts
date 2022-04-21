@@ -1,6 +1,15 @@
-import { RootStateType } from "../users/types";
+import { ProductsState } from "../products/types";
+import { UsersStateType } from "../users/types";
 
-export const initialState : RootStateType = {
+type InitialState = {
+  products: ProductsState
+  users: UsersStateType
+}
+
+export const initialState : InitialState = {
+    products: {
+      list: []
+    },
     users: {
     isSignedIn: false,  //サインインしているかどうか　
     role: "",
