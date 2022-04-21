@@ -71,6 +71,13 @@ useEffect(()=>{
     db.collection('products').doc(id).get()
       .then((snapshot: any)=> {
         const data = snapshot.data()
+        setImages(data.images);
+        setName(data.name);
+        setDescription(data.description);
+        setCategory(data.category);
+        setGender(data.gender);
+        setPrice(data.price);
+        setSizes(data.sizes);
       })
   }
 }, [id]);  //第二引数には[]は初回のレンダリングのみ実行、[id]はidが変更されるたびに実行される
@@ -94,7 +101,7 @@ useEffect(()=>{
           <PrimaryButton
             label="商品情報を保存"
             
-            onClick={() => dispatch(saveProduct(id, name, description, category, gender, price, images))}
+            onClick={() => dispatch(saveProduct(id, name, description, category, gender, price, images,sizes))}
 
           ></PrimaryButton>
         </div>
