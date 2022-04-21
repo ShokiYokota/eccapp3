@@ -13,7 +13,7 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import MOreVertIcon from '@material-ui/icons/MoreVert'
 import { useState } from 'react'
-import { deleteProduct } from '../reducks/products/operation'
+import { deleteProduct } from '../../reducks/products/operations'
 
 type ProductCardProps = {
   id: string

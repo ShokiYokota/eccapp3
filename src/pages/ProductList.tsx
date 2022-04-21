@@ -21,7 +21,13 @@ export const ProductList = () => {
       <div className="p-grid__row">
         {products.length > 0 && 
           products.map((product) => (
-            <ProductCard key={product.id}/>
+            <ProductCard 
+            id={product.id}
+            name={product.name}
+            price={product.price}
+            images={product.images}
+            key={product.id}
+            />
           ))}
       </div>
     </section>

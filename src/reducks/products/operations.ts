@@ -5,6 +5,9 @@ import { AnyAction } from "redux"
 import { ProductData, ProductsState } from "./types"
 import { Image,Size } from "../../components/products/types"
 import { fetchProductsAction } from "./actions"
+import { ProductList } from "../../pages/ProductList"
+import { AppState } from "../store/store"
+import {deleteProductAction} from "./actions"
 
 const productsRef = db.collection('products')
 
@@ -19,6 +22,17 @@ export const fetchProducts = ():ThunkAction<void,void,unknown,AnyAction> =>{
         })
         dispacth(fetchProductsAction(productsList))
       })
+  }
+}
+
+export const deleteProduct = (id :string) :ThunkAction<void,AppState,unknown,AnyAction> => {
+  return async (dispatch,getState) => {
+    productsRef.doc(id).dalete()
+    .then(()=> {
+      const prevProducts = getState().products.list;
+      const nextProducts = prevProducts.filter(product => product.id !== id)
+      dispatch(deleteProductAction(nextProducts))
+    })
   }
 }
 
