@@ -13,7 +13,7 @@ const productsRef = db.collection('products')
 
 export const fetchProducts = ():ThunkAction<void,void,unknown,AnyAction> =>{
   return async (dispacth) => {
-    productsRef.orderBy('updated_at','decs').get() //更新日付で降順で＝新しい順で並び替え
+    productsRef.orderBy('updated_at','desc').get() //更新日付で降順で＝新しい順で並び替え
       .then((snapshots:any) =>{
         const productsList: ProductData[] = []
         snapshots.forEach((snapshot:any)=>{
@@ -27,7 +27,7 @@ export const fetchProducts = ():ThunkAction<void,void,unknown,AnyAction> =>{
 
 export const deleteProduct = (id :string) :ThunkAction<void,AppState,unknown,AnyAction> => {
   return async (dispatch,getState) => {
-    productsRef.doc(id).dalete()
+    productsRef.doc(id).delete()
     .then(()=> {
       const prevProducts = getState().products.list;
       const nextProducts = prevProducts.filter(product => product.id !== id)
@@ -68,10 +68,10 @@ export const saveProduct = (
     data.created_at = timestamp
   }
 
-    return productsRef.doc(id).set(data, {marge:true})
+    return productsRef.doc(id).set(data, {merge:true})
     .then(() =>{
       dispatch((push('/')))
-    }).cathch((error:any)=>{
+    }).catch((error)=>{
       throw new Error(error)
       
     })
