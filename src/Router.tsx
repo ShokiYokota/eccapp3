@@ -1,4 +1,3 @@
-import React from "react";
 import {Route,Switch} from "react-router";
 import {SignIn,SignUp,Reset,ProductEdit,ProductList,ProductDetail,OrderConfirm,OrderHistory} from "./pages/Index";
 import { Auth } from "./Auth";

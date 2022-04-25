@@ -1,15 +1,12 @@
 import {InputLabel, MenuItem, FormControl, Select, makeStyles} from "@material-ui/core";
 
 
-type SelectType = {
+type SelectTypeProps = {
   label: string;
   required: boolean;
   value: string;
   select: (value: string) => void;
-  options: {
-    id: string
-    name: string
-  }[]
+  options: {id: string; name: string}[]
 }
 
 const useStyles = makeStyles({
@@ -20,7 +17,7 @@ const useStyles = makeStyles({
   }
 })
 
-export const SelectBox = (props: SelectType): JSX.Element => {
+export const SelectBox = (props: SelectTypeProps): JSX.Element => {
 
   const classes = useStyles();
 
