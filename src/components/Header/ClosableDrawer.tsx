@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react'
+import { ChangeEvent } from 'react'
 import { IconButton, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, makeStyles } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import AddCircleIcon from '@material-ui/icons/AddCircle'

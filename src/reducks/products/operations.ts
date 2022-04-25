@@ -5,11 +5,9 @@ import { AnyAction } from "redux"
 import { OrderedProduct, ProductData, ProductsState } from "./types"
 import { Image, Size } from "../../components/products/types"
 import { fetchProductsAction } from "./actions"
-import { ProductList } from "../../pages/ProductList"
 import { AppState } from "../store/store"
 import { deleteProductAction } from "./actions"
 import { AddedProduct } from "../users/types"
-import { time } from "console"
 
 const productsRef = db.collection('products')
 

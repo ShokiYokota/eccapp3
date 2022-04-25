@@ -1,11 +1,9 @@
-import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from '../reducks/products/operations'
 import { getProducts } from '../reducks/products/selectors'
 import { AppState } from '../reducks/store/store'
 import { ProductCard } from '../components/products'
-import { ProductsReducer } from '../reducks/products/reducers'
 
 export const ProductList = () => {
   const dispatch = useDispatch();

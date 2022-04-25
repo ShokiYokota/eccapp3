@@ -1,4 +1,3 @@
-import React from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import { Badge } from '@material-ui/core'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
@@ -12,7 +11,6 @@ import { db } from '../../firebase'
 import { AddedProduct } from '../../reducks/users/types'
 import { fetchProductsInCart } from '../../reducks/users/operations'
 import { push } from 'connected-react-router'
-import { fetchProducts } from '../../reducks/products/operations'
 
 
 export const HeaderMenus = (props:any) =>{

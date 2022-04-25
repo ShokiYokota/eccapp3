@@ -1,5 +1,3 @@
-import React from 'react'
-
 type ImagePreviewProps = {
   id: string
   path: string

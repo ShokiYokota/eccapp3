@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../reducks/store/store";
 import { signOut } from "../reducks/users/operations";

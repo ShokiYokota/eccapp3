@@ -1,4 +1,3 @@
-import React from 'react'
 import { Paper, TableContainer, Table, TableBody, TableHead, TableRow, IconButton, TableCell } from '@material-ui/core'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import DeleteIcon from '@material-ui/icons/Delete'

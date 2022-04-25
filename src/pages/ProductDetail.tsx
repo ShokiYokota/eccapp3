@@ -1,5 +1,4 @@
 import { db, FirebaseTimestamp } from '../firebase'
-import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { ProductData } from '../reducks/products/types'
@@ -8,11 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import HTMLReactParser from 'html-react-parser'
 import { ImageSwiper, SizeTable } from '../components/products/index'
 import { useCallback } from 'react'
-import { push } from 'connected-react-router'
 import { addProductToCart } from '../reducks/users/operations'
-// import { useSelector } from 'react-redux'
-// import { AppState } from '../reducks/store/store'
-import path from 'path'
 
 const useStyles = makeStyles((theme) => ({
   sliderBox: {

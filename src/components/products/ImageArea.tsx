@@ -1,4 +1,3 @@
-import React from 'react'
 import { IconButton } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate'

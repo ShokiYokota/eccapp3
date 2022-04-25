@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState } from 'react'
 import NoImage from '../../assets/img/src/no_image.png'
 import { Image } from './types'

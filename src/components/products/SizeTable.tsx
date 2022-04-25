@@ -1,4 +1,3 @@
-import React from 'react'
 import { TableContainer, Table, TableBody, TableRow, IconButton, TableCell } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'

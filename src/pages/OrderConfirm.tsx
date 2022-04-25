@@ -1,5 +1,5 @@
-import { Divider, List, makeStyles, withWidth } from "@material-ui/core";
-import React, { useCallback, useMemo } from "react";
+import { Divider, List, makeStyles} from "@material-ui/core";
+import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CartListItem } from "../components/products";
 import { PrimaryButton, TextDetail } from "../components/UIkit";

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import ImageArea from "../components/products/ImageArea";
 import { TextInput ,SelectBox ,PrimaryButton} from "../components/UIkit";

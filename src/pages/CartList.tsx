@@ -1,8 +1,7 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { useSelector,useDispatch} from "react-redux";
 import { List, makeStyles } from "@material-ui/core";
 import { AppState } from "../reducks/store/store";
-import { getProducts } from "../reducks/products/selectors";
 import { getProductsInCart } from "../reducks/users/selectors";
 import { CartListItem } from "../components/products";
 import { PrimaryButton, GreyButton} from "../components/UIkit";

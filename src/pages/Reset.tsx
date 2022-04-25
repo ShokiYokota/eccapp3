@@ -1,10 +1,8 @@
-import React, {useCallback,useState,ChangeEvent} from 'react';
+import {useCallback,useState,ChangeEvent} from 'react';
 import { useDispatch } from 'react-redux';
 import { TextInput , PrimaryButton} from "../components/UIkit";
-import { auth } from '../firebase';
 import {resetPassword} from "../reducks/users/operations"
 import {push} from "connected-react-router";
-// import { AppThunk } from '../reducks/users/operations';
 
 export const Reset = () =>{
   const dispatch = useDispatch()
