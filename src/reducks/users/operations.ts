@@ -1,13 +1,27 @@
 import React from "react";
 import { signInAction, signOutAction } from "./actions";
 import {push} from "connected-react-router"
-import { RootStateType, UsersStateType } from "./types";
 import {auth,db,FirebaseTimestamp} from "../../firebase"
 import { ThunkAction } from 'redux-thunk'
 import { AnyAction } from "redux";
+import { AppState } from "../store/store";
+import { AddedProduct, UserState } from './types';
+// import { OrderHistoty } from "../products/types";
+
+
+
+export const addProductToCart = (addedProduct: AddedProduct) :ThunkAction<void,AppState,unknown,AnyAction>=> {
+  return async (dispatch,getState) => {
+    const uid = getState().users.uid;
+    const cartRef = db.collection('users').doc(uid).collection('cart').doc();
+    addedProduct['cartId'] = cartRef.id
+    await cartRef.set(addedProduct)
+    dispatch(push('/'))
+  }
+}
 
 // サインインしているかどうか監視し返す関数
-export const listenAuthState = ():ThunkAction<void,RootStateType,unknown,AnyAction> => {
+export const listenAuthState = ():ThunkAction<void,void,unknown,AnyAction> => {
   return async(dispatch) =>{
     return auth.onAuthStateChanged((user:any)=>{ //引数なし、戻り値firebase.Observerかfirebase.User
       
@@ -16,29 +30,27 @@ export const listenAuthState = ():ThunkAction<void,RootStateType,unknown,AnyActi
         db.collection('users').doc(uid).get()
         .then((snapshot:any)=>{
           //snapshotは返ってきたユーザーのdata
-          const data = snapshot.data() as Omit<RootStateType["users"],'isSignedIn'>;
-
-          //ユーザーの認証情報をセットする
-          dispatch(signInAction({
-            role:data.role,
-            uid:data.uid,
-            username:data.username
-          }))
-        })
-      }else {
+          const data = snapshot.data() as UserState
+            if (!data) return
+            dispatch(
+              signInAction({
+                isSignedIn: true,
+                // orders: data.orders ? data.orders : [],
+                role: data.role,
+                uid: uid,
+                username: data.username,
+                cart: data.cart ? data.cart : [],
+              })
+            )
+          })
+      } else {
         dispatch(push('/signin'))
       }
     })
   }
 }
 
-// AppThunkに型定義
-// export type AppThunk<ReturnType = void> = ThunkAction<
-//   ReturnType,
-//   RootStateType,
-//   unknown,
-//   AnyAction
-// >
+
 //サインインする時に実行する関数
 export const signIn = (email:string,password:string): ThunkAction<void,void,unknown,AnyAction>=>{
   return async (dispatch)=>{
@@ -61,13 +73,16 @@ export const signIn = (email:string,password:string): ThunkAction<void,void,unkn
           db.collection('users').doc(uid).get()
           .then((snapshot:any)=>{
             //snapshotは返ってきたユーザーのdata
-            const data = snapshot.data() as Omit<RootStateType["users"],'isSignedIn'>;
+            const data = snapshot.data();
 
             //ユーザーの認証情報をセットする
             dispatch(signInAction({
-              role:data.role,
-              uid:data.uid,
-              username:data.username
+              isSignedIn: true,
+            // orders: data.orders ? data.orders : [],
+            role: data.role,
+            uid: data.uid,
+            username: data.username,
+            cart: data.cart ? data.cart : [],
             }))
 
             //Homeに遷移させる
@@ -140,11 +155,11 @@ export const resetPassword = (email:string) :ThunkAction<void,void,unknown,AnyAc
       alert("必須項目が未入力です")
       return false
     }else{
-      auth.sendPasswordEmail(email)
+      auth.sendPasswordResetEmail(email)
         .then(()=>{
           alert('入力されたアドレスにパスワードリセット用のメールを送りました')
           dispatch(push('/signin'))
-        }).cathch(()=>{
+        }).catch(()=>{
           alert('パスワードリセットに失敗しました')
         })
     }

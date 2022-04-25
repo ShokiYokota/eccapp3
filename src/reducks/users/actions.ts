@@ -1,33 +1,40 @@
-import { UserActionType, UsersStateType, UsersType } from "./types";
+import { AddedProduct,
+  //FetchOrdersHistoryAction,
+  FetchProductsInCartActoin,
+  //FETCH_ORDERS_HISTORY,
+  FETCH_PRODUCTS_IN_CART,
+  SignInAction,
+  SignOutAction,
+  SIGN_IN,
+  SIGN_OUT,
+  UserState,} from "./types";
 
-//Userのアクションタイプの定数
-export const ACTION_TYPE = {
-  SIGN_IN: "SIGN_IN",
-  SIGN_OUT: "SIGN_OUT"
-}as const;
 
-
-export const signInAction = (userState:Omit<UsersType['state'],'isSignedIn'>): UsersType['action'] => { //userState=Object型でkeyにuserIdとuserNameを持っている
+export const signInAction = (userState: UserState):SignInAction => { //userState=Object型でkeyにuserIdとuserNameを持っている
   return { 
-    type: ACTION_TYPE.SIGN_IN,
+    type: SIGN_IN,
     payload: {   //payload=データの塊
       isSignedIn: true,
+      // orders: userState.orders,
       role: userState.role,
       uid: userState.uid,
-      username: userState.username
+      username: userState.username,
+      cart: userState.cart,
     }
   }
 }
 
 // TypeScriptなしの書き方⇨ export const SIGN_OUT = "SIGN_OUT";
-export const signOutAction = () :UsersType['action'] => {
+export const signOutAction = (): SignOutAction => {
   return {
-    type: ACTION_TYPE.SIGN_OUT,
+    type: SIGN_OUT,
     payload: {
-      isSignedIn: false, //初期値に戻す
-      role: "",
-      uid: "",
-      username: ""
-    }
+      isSignedIn: false,
+      // orders: [],
+      role: '',
+      uid: '',
+      username: '',
+      cart: [],
+    },
   }
 }

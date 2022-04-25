@@ -1,7 +1,12 @@
 import {createSelector} from "reselect";
-import { RootStateType } from "./types";
+import { AppState} from "../../reducks/store/store";
 
-const usersSelector = (state:RootStateType) => state.users;
+const usersSelector = (state:AppState) => state.users;
+
+export const getProductsInCart = createSelector(
+  [usersSelector],
+  state => state.cart
+)
 
 export const getIsSignedIn = createSelector(
   [usersSelector],

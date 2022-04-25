@@ -1,25 +1,43 @@
-import {ACTION_TYPE} from "./actions";
+import { Image } from '../../components/products/types'
+import firebase from 'firebase/app'
+export type UserAction = SignInAction | SignOutAction | FetchProductsInCartActoin // | FetchOrdersHistoryAction
 
-// storeのstateの型
-export type RootStateType = {
-  users:UsersType['state'];
+export type UserState = {
+  isSignedIn?: boolean
+  role: string
+  uid: string
+  username: string
+  cart: AddedProduct[]
 }
 
-// UsersTypeの型
-export type UsersType = {
-  state: UsersStateType;
-  action: UserActionType;
+export const SIGN_IN = 'SIGN_IN'
+export type SignInAction = {
+  type: typeof SIGN_IN
+  payload: UserState
 }
 
-export type UsersStateType = {
-  isSignedIn: boolean;
-  role: string;
-  uid: string;
-  username: string;
+export const SIGN_OUT = 'SIGN_OUT'
+export type SignOutAction = {
+  type: typeof SIGN_OUT
+  payload: UserState
 }
 
-export type UserActionType = {
-  type: keyof typeof ACTION_TYPE;
-  payload: UsersStateType;
+export type AddedProduct = {
+  cartId: string
+  added_at: firebase.firestore.Timestamp
+  description: string
+  gender: string
+  images: Image[]
+  name: string
+  price: number
+  productId: string
+  quantity: number
+  size: string
 }
 
+export const FETCH_PRODUCTS_IN_CART = 'FETCH_PRODUCTS_IN_CART'
+
+export type FetchProductsInCartActoin = {
+  type: typeof FETCH_PRODUCTS_IN_CART
+  payload: AddedProduct[]
+}

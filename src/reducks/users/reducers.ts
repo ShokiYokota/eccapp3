@@ -1,25 +1,28 @@
-import { initialState } from '../store/initialState';
-import { UsersType } from './types';
+import {initialState} from '../../reducks/store/initialState'
+import { FETCH_PRODUCTS_IN_CART, SIGN_IN, SIGN_OUT, UserAction, UserState } from './types'
 
-// userのアクションを呼ぶReducer
-export const UsersReducer = (
-  state = initialState.users,
-  action: UsersType["action"]
-) => {
+export const UsersReducer = (state: UserState = initialState.users, action: UserAction): UserState => {
   switch (action.type) {
-    case "SIGN_IN":
+    case SIGN_IN:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       }
-    case "SIGN_OUT":
+    case SIGN_OUT:
+      return {
+        ...action.payload,
+      }
+    case FETCH_PRODUCTS_IN_CART:
       return {
         ...state,
-        ...action.payload
+        cart: [...action.payload],
       }
+    // case FETCH_ORDERS_HISTORY:
+    //   return {
+    //     ...state,
+    //     orders: [...action.payload],
+    //   }
     default:
-    // console.error(`type is ${Object.values(ACTION_TYPE).join(' or ')}`);
-    // throw new Error(`type is ${Object.values(ACTION_TYPE).join(' or ')}`);
-    return state;
+      return state
   }
 }
