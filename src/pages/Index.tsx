@@ -6,5 +6,6 @@ export {Home} from './Home';
 export {ProductList} from './ProductList';
 export {ProductDetail} from './ProductDetail';
 export {CartList} from './CartList';
-export {OrderConfirm} from './OrderConfirm'
+export {OrderConfirm} from './OrderConfirm';
+export {OrderHistory} from './OrderHistory';
 // ToDo アルファベット順にする

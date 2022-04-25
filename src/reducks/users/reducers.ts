@@ -1,5 +1,5 @@
 import {initialState} from '../../reducks/store/initialState'
-import { FETCH_PRODUCTS_IN_CART, SIGN_IN, SIGN_OUT, UserAction, UserState } from './types'
+import { FETCH_PRODUCTS_IN_CART, SIGN_IN, SIGN_OUT, UserAction, UserState,FETCH_ORDERS_HISTORY } from './types'
 
 export const UsersReducer = (state: UserState = initialState.users, action: UserAction): UserState => {
   switch (action.type) {
@@ -17,11 +17,11 @@ export const UsersReducer = (state: UserState = initialState.users, action: User
         ...state,
         cart: [...action.payload],
       }
-    // case FETCH_ORDERS_HISTORY:
-    //   return {
-    //     ...state,
-    //     orders: [...action.payload],
-    //   }
+    case FETCH_ORDERS_HISTORY:
+      return {
+        ...state,
+        orders: [...action.payload],
+      }
     default:
       return state
   }

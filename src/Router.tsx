@@ -1,6 +1,6 @@
 import React from "react";
 import {Route,Switch} from "react-router";
-import {SignIn,Home,SignUp,Reset,ProductEdit,ProductList,ProductDetail,OrderConfirm} from "./pages/Index";
+import {SignIn,SignUp,Reset,ProductEdit,ProductList,ProductDetail,OrderConfirm,OrderHistory} from "./pages/Index";
 import { Auth } from "./Auth";
 import { CartList } from "./pages/CartList";
 
@@ -18,7 +18,7 @@ export const Router = (): JSX.Element => {
         <Route path="/product/edit(/:id)?" component={ProductEdit} />
         <Route exact path="/cart" component={CartList} />
         <Route exact path="/order/confirm" component={OrderConfirm} />
-        {/* <Route exact path="/order/history" component={OrderHistory} /> */}
+        <Route exact path="/order/history" component={OrderHistory} />
       </Auth>
     </Switch>
   )

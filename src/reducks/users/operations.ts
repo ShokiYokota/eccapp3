@@ -1,23 +1,23 @@
 import React from "react";
-import { signInAction,signOutAction,fetchProductsInCartActoin} from "./actions";
-import {push} from "connected-react-router"
-import {auth,db,FirebaseTimestamp} from "../../firebase"
+import { signInAction, signOutAction, fetchProductsInCartActoin,fetchOrdersHistoryAction } from "./actions";
+import { push } from "connected-react-router"
+import { auth, db, FirebaseTimestamp } from "../../firebase"
 import { ThunkAction } from 'redux-thunk'
 import { AnyAction } from "redux";
 import { AppState } from "../store/store";
 import { AddedProduct, UserState } from './types';
-// import { OrderHistoty } from "../products/types";
+import { OrderHistory } from "../products/types";
 
-export const fetchProductsInCart = (products: AddedProduct[]): ThunkAction<void,void,unknown,AnyAction> =>{
-  return async(dispatch) => {
+export const fetchProductsInCart = (products: AddedProduct[]): ThunkAction<void, void, unknown, AnyAction> => {
+  return async (dispatch) => {
     dispatch(fetchProductsInCartActoin(products))
   }
 }
 
 
 
-export const addProductToCart = (addedProduct: AddedProduct) :ThunkAction<void,AppState,unknown,AnyAction>=> {
-  return async (dispatch,getState) => {
+export const addProductToCart = (addedProduct: AddedProduct): ThunkAction<void, AppState, unknown, AnyAction> => {
+  return async (dispatch, getState) => {
     const uid = getState().users.uid;
     const cartRef = db.collection('users').doc(uid).collection('cart').doc();
     addedProduct['cartId'] = cartRef.id
@@ -26,22 +26,43 @@ export const addProductToCart = (addedProduct: AddedProduct) :ThunkAction<void,A
   }
 }
 
+export const fetchOrdersHistory = (): ThunkAction<void, AppState, unknown, AnyAction> => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid;
+    const list :OrderHistory[] = [];
+
+    db
+      .collection('users')
+      .doc(uid)
+      .collection('orders')
+      .orderBy('updated_at', 'desc')
+      .get()
+      .then((snapshots) => {
+        snapshots.forEach(snapshot => {
+          const data = snapshot.data() as OrderHistory
+          list.push(data)
+        })
+        dispatch(fetchOrdersHistoryAction(list))
+      })
+  }
+}
+
 // サインインしているかどうか監視し返す関数
-export const listenAuthState = ():ThunkAction<void,void,unknown,AnyAction> => {
-  return async(dispatch) =>{
-    return auth.onAuthStateChanged((user:any)=>{ //引数なし、戻り値firebase.Observerかfirebase.User
-      
-      if(user){ //userが存在していたら
+export const listenAuthState = (): ThunkAction<void, void, unknown, AnyAction> => {
+  return async (dispatch) => {
+    return auth.onAuthStateChanged((user: any) => { //引数なし、戻り値firebase.Observerかfirebase.User
+
+      if (user) { //userが存在していたら
         const uid = user.uid
         db.collection('users').doc(uid).get()
-        .then((snapshot:any)=>{
-          //snapshotは返ってきたユーザーのdata
-          const data = snapshot.data() as UserState
+          .then((snapshot: any) => {
+            //snapshotは返ってきたユーザーのdata
+            const data = snapshot.data() as UserState
             if (!data) return
             dispatch(
               signInAction({
                 isSignedIn: true,
-                // orders: data.orders ? data.orders : [],
+                orders: data.orders ? data.orders : [],
                 role: data.role,
                 uid: uid,
                 username: data.username,
@@ -58,50 +79,50 @@ export const listenAuthState = ():ThunkAction<void,void,unknown,AnyAction> => {
 
 
 //サインインする時に実行する関数
-export const signIn = (email:string,password:string): ThunkAction<void,void,unknown,AnyAction>=>{
-  return async (dispatch)=>{
+export const signIn = (email: string, password: string): ThunkAction<void, void, unknown, AnyAction> => {
+  return async (dispatch) => {
     //バリテーション
     //emailとpasswordが空の場合alertを出す
-    if(email === "" || password === ''){
+    if (email === "" || password === '') {
       alert("必須項目が未入力です");
       return false;
     }
 
     //メアドとパスワードで認証する
-    auth.signInWithEmailAndPassword(email,password)
-      .then((result: { user: any; })=>{
+    auth.signInWithEmailAndPassword(email, password)
+      .then((result: { user: any; }) => {
         const user = result.user;//戻り値はPromise<firebase.auth.UserCredinal>
 
         if (user) {//boolean型？？？
           const uid = user.uid;
-          
+
           //firebaseのusersからuidを検索してgetする
           db.collection('users').doc(uid).get()
-          .then((snapshot:any)=>{
-            //snapshotは返ってきたユーザーのdata
-            const data = snapshot.data();
+            .then((snapshot: any) => {
+              //snapshotは返ってきたユーザーのdata
+              const data = snapshot.data();
 
-            //ユーザーの認証情報をセットする
-            dispatch(signInAction({
-              isSignedIn: true,
-            // orders: data.orders ? data.orders : [],
-            role: data.role,
-            uid: data.uid,
-            username: data.username,
-            cart: data.cart ? data.cart : [],
-            }))
+              //ユーザーの認証情報をセットする
+              dispatch(signInAction({
+                isSignedIn: true,
+                orders: data.orders ? data.orders : [],
+                role: data.role,
+                uid: data.uid,
+                username: data.username,
+                cart: data.cart ? data.cart : [],
+              }))
 
-            //Homeに遷移させる
-            dispatch(push('/'))
-          })
+              //Homeに遷移させる
+              dispatch(push('/'))
+            })
         }
       })
-    }
+  }
 }
-  
 
-export const signUp  = (username:string, email:string, password:string, confirmPassword:string): ThunkAction<void,void,unknown,AnyAction> =>{
-  return async(dispatch) =>{
+
+export const signUp = (username: string, email: string, password: string, confirmPassword: string): ThunkAction<void, void, unknown, AnyAction> => {
+  return async (dispatch) => {
     // return async(dispatch: React.Dispatch<unknown>) =>{
     //バリデーション
     //usernameとemailとpasswordとconfirmPasswordが空の場合alertを出す
@@ -117,7 +138,7 @@ export const signUp  = (username:string, email:string, password:string, confirmP
 
     //emailとpasswordでユーザーを作成する
     return auth.createUserWithEmailAndPassword(email, password)
-      .then((result:any) => {
+      .then((result: any) => {
         const user = result.user;
 
         //アカウント作成が成功していたら処理を続ける
@@ -145,27 +166,27 @@ export const signUp  = (username:string, email:string, password:string, confirmP
       })
   }
 }
-export const signOut = () :ThunkAction<void,void,unknown,AnyAction>=> {
+export const signOut = (): ThunkAction<void, void, unknown, AnyAction> => {
   return async (dispatch) => {
-    auth.signOut() 
-    .then(()=>{
-      dispatch(signOutAction());
-      dispatch(push('/signin'))
-    })
+    auth.signOut()
+      .then(() => {
+        dispatch(signOutAction());
+        dispatch(push('/signin'))
+      })
   }
 }
 
-export const resetPassword = (email:string) :ThunkAction<void,void,unknown,AnyAction>=> {
-  return async (dispatch) =>{
-    if(email === ""){
+export const resetPassword = (email: string): ThunkAction<void, void, unknown, AnyAction> => {
+  return async (dispatch) => {
+    if (email === "") {
       alert("必須項目が未入力です")
       return false
-    }else{
+    } else {
       auth.sendPasswordResetEmail(email)
-        .then(()=>{
+        .then(() => {
           alert('入力されたアドレスにパスワードリセット用のメールを送りました')
           dispatch(push('/signin'))
-        }).catch(()=>{
+        }).catch(() => {
           alert('パスワードリセットに失敗しました')
         })
     }

@@ -1,7 +1,8 @@
+import { OrderHistory } from "../products/types";
 import { AddedProduct,
-  //FetchOrdersHistoryAction,
+  FetchOrdersHistoryAction,
   FetchProductsInCartActoin,
-  //FETCH_ORDERS_HISTORY,
+  FETCH_ORDERS_HISTORY,
   FETCH_PRODUCTS_IN_CART,
   SignInAction,
   SignOutAction,
@@ -16,13 +17,20 @@ import { AddedProduct,
     }
   }
 
+  export const fetchOrdersHistoryAction = (history: OrderHistory[]):FetchOrdersHistoryAction=> { //OrderHistory[]は注文したid,日時等を持っている
+    return { 
+      type: FETCH_ORDERS_HISTORY,
+      payload: history
+    }
+  }
+
 
 export const signInAction = (userState: UserState):SignInAction => { //userState=Object型でkeyにuserIdとuserNameを持っている
   return { 
     type: SIGN_IN,
     payload: {   //payload=データの塊
       isSignedIn: true,
-      // orders: userState.orders,
+      orders: userState.orders,
       role: userState.role,
       uid: userState.uid,
       username: userState.username,
@@ -37,7 +45,7 @@ export const signOutAction = (): SignOutAction => {
     type: SIGN_OUT,
     payload: {
       isSignedIn: false,
-      // orders: [],
+      orders: [],
       role: '',
       uid: '',
       username: '',

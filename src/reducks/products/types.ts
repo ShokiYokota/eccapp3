@@ -33,3 +33,12 @@ export type OrderedProduct = {
   price: number
   size: string
 }
+
+export type OrderHistory = {
+  amount: number,
+  created_at:firebase.firestore.Timestamp,
+  id: string,
+  products: OrderedProduct[],
+  shippingDate: firebase.firestore.Timestamp,
+  updated_at: firebase.firestore.Timestamp
+}

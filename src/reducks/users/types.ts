@@ -1,6 +1,7 @@
 import { Image } from '../../components/products/types'
 import firebase from 'firebase/app'
-export type UserAction = SignInAction | SignOutAction | FetchProductsInCartActoin // | FetchOrdersHistoryAction
+import {OrderHistory } from '../products/types'
+export type UserAction = SignInAction | SignOutAction | FetchProductsInCartActoin | FetchOrdersHistoryAction
 
 export type UserState = {
   isSignedIn?: boolean
@@ -8,6 +9,7 @@ export type UserState = {
   uid: string
   username: string
   cart: AddedProduct[]
+  orders: OrderHistory[]
 }
 
 export const SIGN_IN = 'SIGN_IN'
@@ -41,3 +43,11 @@ export type FetchProductsInCartActoin = {
   type: typeof FETCH_PRODUCTS_IN_CART
   payload: AddedProduct[]
 }
+
+export const FETCH_ORDERS_HISTORY= 'FETCH_ORDERS_HISTORY'
+
+export type FetchOrdersHistoryAction= {
+  type: typeof FETCH_ORDERS_HISTORY
+  payload: OrderHistory[]
+}
+

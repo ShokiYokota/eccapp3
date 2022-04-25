@@ -15,6 +15,7 @@ export const initialState : InitialState = {
     isSignedIn: false,  //サインインしているかどうか　
     role: "",
     uid: "",          //numberなら初期値０でいい？
-    username: ""
+    username: "",
+    orders: []
   }
 }
