@@ -9,6 +9,13 @@ import { AddedProduct,
   SIGN_OUT,
   UserState,} from "./types";
 
+  export const fetchProductsInCartActoin = (products: AddedProduct[]):FetchProductsInCartActoin => { //AddedProduct[]は商品に関するデータ構造（（例）名前やid）を持っている
+    return { 
+      type: FETCH_PRODUCTS_IN_CART,
+      payload: products
+    }
+  }
+
 
 export const signInAction = (userState: UserState):SignInAction => { //userState=Object型でkeyにuserIdとuserNameを持っている
   return { 

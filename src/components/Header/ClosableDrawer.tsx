@@ -39,9 +39,9 @@ export const ClosableDrawer = (props:any) => {    const classes = useStyles()
       (event: ChangeEvent<HTMLInputElement>) => setKeyword(event.target.value),
       [setKeyword]
     )
-  
+  // メニューを選択した時
     const selectMenu = (event: any, path: string) => {
-      dispatch(push(path))
+      dispatch(push(path));
       props.onClose(event)
     }
   

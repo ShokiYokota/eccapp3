@@ -4,13 +4,13 @@ import { UsersReducer } from '../users/reducers';
 import { ProductsReducer } from '../products/reducers';
 import { History } from "history";
 import thunk from "redux-thunk";
-import { UsersStateType } from '../users/types';
+import { UserState } from '../users/types';
 import { ProductsState } from '../products/types';
 
 export type AppState = {
   router: Reducer<RouterState>
   products: ProductsState
-  users: UsersStateType
+  users: UserState
 }
 
 export const createStore = (history: History)=>{

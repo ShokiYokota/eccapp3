@@ -1,9 +1,9 @@
 import { ProductsState } from "../products/types";
-import { UsersStateType } from "../users/types";
+import { UserState } from "../users/types";
 
 type InitialState = {
   products: ProductsState
-  users: UsersStateType
+  users: UserState
 }
 
 export const initialState : InitialState = {
@@ -11,6 +11,7 @@ export const initialState : InitialState = {
       list: []
     },
     users: {
+    cart:[],
     isSignedIn: false,  //サインインしているかどうか　
     role: "",
     uid: "",          //numberなら初期値０でいい？

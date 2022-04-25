@@ -1,25 +1,23 @@
 import React from "react";
-import {Route,Routes} from "react-router";
+import {Route,Switch} from "react-router";
 import {SignIn,Home,SignUp,Reset,ProductEdit,ProductList,ProductDetail} from "./pages/Index";
-import { BrowserRouter } from "react-router-dom";
 import { Auth } from "./Auth";
 
 
-export const Router = () => {
+export const Router = (): JSX.Element => {
   return (
-    <BrowserRouter>
-    <Routes>
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/signin" element={<SignIn />} />
-      <Route path="/signin/reset" element={<Reset />} />
-
+    <Switch>
+      <Route exact path={'/signup'} component={SignUp} />
+      <Route exact path={'/signin'} component={SignIn} />
+      <Route exact path={'/signin/reset'} component={Reset} />
       <Auth>
-        <Route path={"(/)?"} element={<ProductList />} />
-        <Route path={"/product/:id"} element={<ProductDetail/>}/>
-        <Route path={"/product/edit(/:id)?"} element={<ProductEdit/>}/>
+        <Route exact path={'(/)?'} component={ProductList} />
+        <Route exact path="/product/detail/:id" component={ProductDetail} />
+        <Route path="/product/edit(/:id)?" component={ProductEdit} />
+        {/* <Route exact path="/cart" component={CartList} />
+        <Route exact path="/order/confirm" component={OrderConfirm} />
+        <Route exact path="/order/history" component={OrderHistory} /> */}
       </Auth>
-
-    </Routes>
-  </BrowserRouter>
+    </Switch>
   )
 }

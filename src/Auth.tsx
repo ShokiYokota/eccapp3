@@ -2,7 +2,7 @@ import React,{useEffect,ReactNode} from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { listenAuthState } from "./reducks/users/operations";
 import {getIsSignedIn} from "./reducks/users/selectors"
-import { RootStateType, UsersStateType } from "./reducks/users/types";
+import { AppState } from "./reducks/store/store";
 
 type AuthPropsType = {
   children: ReactNode
@@ -10,7 +10,7 @@ type AuthPropsType = {
 
 export const Auth = ({ children }: AuthPropsType): JSX.Element => {
   const dispatch = useDispatch()
-  const selector = useSelector((state:RootStateType ) => state)
+  const selector = useSelector((state:AppState) => state)
   const isSignedIn = getIsSignedIn(selector)
 
   useEffect(() => {

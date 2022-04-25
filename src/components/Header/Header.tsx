@@ -10,6 +10,14 @@ import {HeaderMenus} from './HeaderMenus'
 import {ClosableDrawer} from './ClosableDrawer'
 import { useCallback } from 'react'
 
+const [open,setOpen] = useState(false);
+const handleDrawerToggle = useCallback((event:React.KeyboardEvent<HTMLInputElement>)=>{
+  if (event.type === 'keydown' && (event.key ==='Tab' || event.key === 'Shift')){
+    return;
+  }
+  setOpen(!open)
+},[setOpen,open]);
+
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
@@ -47,7 +55,7 @@ export const Header = () => {
         )}
       </Toolbar>
     </AppBar>
-    <CloseableDrawer open={open} onClose={handleDrawerToggle} />
+    <ClosableDrawer open={open} onClose={handleDrawerToggle} />
     </div>
   )
 }

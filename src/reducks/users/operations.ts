@@ -1,5 +1,5 @@
 import React from "react";
-import { signInAction, signOutAction } from "./actions";
+import { signInAction,signOutAction,fetchProductsInCartActoin} from "./actions";
 import {push} from "connected-react-router"
 import {auth,db,FirebaseTimestamp} from "../../firebase"
 import { ThunkAction } from 'redux-thunk'
@@ -7,6 +7,12 @@ import { AnyAction } from "redux";
 import { AppState } from "../store/store";
 import { AddedProduct, UserState } from './types';
 // import { OrderHistoty } from "../products/types";
+
+export const fetchProductsInCart = (products: AddedProduct[]): ThunkAction<void,void,unknown,AnyAction> =>{
+  return async(dispatch) => {
+    dispatch(fetchProductsInCartActoin(products))
+  }
+}
 
 
 
