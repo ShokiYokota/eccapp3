@@ -2,21 +2,21 @@ import React from "react";
 import { Button, ButtonProps } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 
-type PrimaryButtonPropsType = Omit<ButtonProps,'variant' >& {
+type GreyButtonPropsType = Omit<ButtonProps,'variant' >& {
   label: string
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=> ({
   "button":{
-    backgroundColor: "#4dd0e1",
+    backgroundColor: theme.palette.grey["300"],
     color: "#000",
     fontSize: 16,
     height: 48,
     marginBottom: 16,
     width: 256
   }
-})
-export const PrimaryButton: React.FC<PrimaryButtonPropsType> = (
+}))
+export const GreyButton: React.FC<GreyButtonPropsType> = (
   {
     label,
     ...others
