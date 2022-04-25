@@ -7,7 +7,7 @@ import { AppState } from '../../reducks/store/store'
 import { getIsSignedIn } from '../../reducks/users/selectors'
 import { push } from 'connected-react-router'
 import {HeaderMenus} from './HeaderMenus'
-import CloseableDrawer from './CloseableDrawer'
+import {ClosableDrawer} from './ClosableDrawer'
 import { useCallback } from 'react'
 
 const useStyles = makeStyles({

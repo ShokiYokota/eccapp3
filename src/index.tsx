@@ -7,6 +7,7 @@ import  {ConnectedRouter}  from 'connected-react-router' ;
 import { MuiThemeProvider } from '@material-ui/core';
 import {theme} from "./assets/theme"
 
+const default function
 const history = createBrowserHistory();
 export const store = createStore(history);
 
