@@ -13,8 +13,8 @@ const useStyles = makeStyles({
 })
 
 type SizeTableProps = {
-  sizes: Size[]
-  addProduct: (selctedSize: string) => void
+  sizes: Size[];
+  addProduct: (selctedSize: string) => void;
 }
 
 

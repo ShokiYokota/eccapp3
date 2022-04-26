@@ -1,4 +1,4 @@
-import { OrderHistory } from "../products/types";
+import { OrderHistorytype } from "../products/types";
 import { AddedProduct,
   FetchOrdersHistoryAction,
   FetchProductsInCartActoin,
@@ -17,7 +17,7 @@ import { AddedProduct,
     }
   }
 
-  export const fetchOrdersHistoryAction = (history: OrderHistory[]):FetchOrdersHistoryAction=> { //OrderHistory[]は注文したid,日時等を持っている
+  export const fetchOrdersHistoryAction = (history: OrderHistorytype[]):FetchOrdersHistoryAction=> { //OrderHistory[]は注文したid,日時等を持っている
     return { 
       type: FETCH_ORDERS_HISTORY,
       payload: history

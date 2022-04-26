@@ -2,8 +2,8 @@ import { ProductsState } from "../products/types";
 import { UserState } from "../users/types";
 
 type InitialState = {
-  products: ProductsState
-  users: UserState
+  products: ProductsState;
+  users: UserState;
 }
 
 export const initialState : InitialState = {

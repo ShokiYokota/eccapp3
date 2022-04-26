@@ -16,10 +16,10 @@ import { useState } from 'react'
 import { deleteProduct } from '../../reducks/products/operations'
 
 type ProductCardProps = {
-  id: string
-  images: Image[]
-  name: string
-  price: number
+  id: string;
+  images: Image[];
+  name: string;
+  price: number;
 }
 
 const useStyles = makeStyles((theme)=>({

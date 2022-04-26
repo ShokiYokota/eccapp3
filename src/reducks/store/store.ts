@@ -7,13 +7,14 @@ import thunk from "redux-thunk";
 import { UserState } from '../users/types';
 import { ProductsState } from '../products/types';
 
+
 export type AppState = {
-  router: Reducer<RouterState>
-  products: ProductsState
-  users: UserState
+  router: Reducer<RouterState>;
+  products: ProductsState;
+  users: UserState;
 }
 
-export const createStore = (history: History)=>{
+export function createStore  (history: History) {
   return reduxCreateStore(
     combineReducers({
       router: connectRouter(history),

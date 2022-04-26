@@ -5,7 +5,7 @@ import Swiper from 'react-id-swiper'
 import 'swiper/css/swiper.css'
 
 type ImageSwiperProps = {
-  images: Image[]
+  images: Image[];
 }
 
 export const ImageSwiper  = (props:ImageSwiperProps) => {

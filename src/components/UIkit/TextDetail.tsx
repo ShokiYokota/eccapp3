@@ -1,8 +1,8 @@
 import { makeStyles } from "@material-ui/core";
 
 type TextDetailProps ={
-  label: string
-  value: string
+  label: string;
+  value: string;
 }
 
 const useStyles = makeStyles({

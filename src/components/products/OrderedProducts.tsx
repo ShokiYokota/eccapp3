@@ -7,7 +7,7 @@ import { PrimaryButton } from "../UIkit"
 
 
 export type OrderedProductsProps={
-  products: OrderedProduct[]
+  products: OrderedProduct[];
 }
 
 const useStyles = makeStyles({

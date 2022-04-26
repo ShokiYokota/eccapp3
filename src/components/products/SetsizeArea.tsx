@@ -10,8 +10,8 @@ import { Size } from './types'
 import { useMemo } from 'react'
 
 type SetSizeAreaProps = {
-  sizes: Size[]
-  setSizes: React.Dispatch<React.SetStateAction<Size[]>>
+  sizes: Size[];
+  setSizes: React.Dispatch<React.SetStateAction<Size[]>>;
 }
 
 const useStyles = makeStyles({

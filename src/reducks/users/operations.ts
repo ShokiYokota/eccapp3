@@ -5,7 +5,7 @@ import { ThunkAction } from 'redux-thunk'
 import { AnyAction } from "redux";
 import { AppState } from "../store/store";
 import { AddedProduct, UserState } from './types';
-import { OrderHistory } from "../products/types";
+import { OrderHistorytype } from "../products/types";
 
 export const fetchProductsInCart = (products: AddedProduct[]): ThunkAction<void, void, unknown, AnyAction> => {
   return async (dispatch) => {
@@ -28,7 +28,7 @@ export const addProductToCart = (addedProduct: AddedProduct): ThunkAction<void, 
 export const fetchOrdersHistory = (): ThunkAction<void, AppState, unknown, AnyAction> => {
   return async (dispatch, getState) => {
     const uid = getState().users.uid;
-    const list :OrderHistory[] = [];
+    const list :OrderHistorytype[] = [];
 
     db
       .collection('users')
@@ -37,8 +37,8 @@ export const fetchOrdersHistory = (): ThunkAction<void, AppState, unknown, AnyAc
       .orderBy('updated_at', 'desc')
       .get()
       .then((snapshots) => {
-        snapshots.forEach(snapshot => {
-          const data = snapshot.data() as OrderHistory
+        snapshots.forEach((snapshot) => {
+          const data = snapshot.data() as OrderHistorytype
           list.push(data)
         })
         dispatch(fetchOrdersHistoryAction(list))
@@ -56,7 +56,7 @@ export const listenAuthState = (): ThunkAction<void, void, unknown, AnyAction> =
         db.collection('users').doc(uid).get()
           .then((snapshot: any) => {
             //snapshotは返ってきたユーザーのdata
-            const data = snapshot.data() as UserState
+            const data = snapshot.data() as UserState;
             if (!data) return
             dispatch(
               signInAction({

@@ -1,11 +1,11 @@
 import { Divider } from "@material-ui/core"
 import { OrderedProducts } from "./OrderedProducts"
-import { OrderHistory } from "../../reducks/products/types"
+import { OrderHistorytype } from "../../reducks/products/types"
 import { TextDetail } from "../UIkit"
 
 
 export type OrderHistoryItemProps ={
-  order: OrderHistory
+  order: OrderHistorytype;
 }
 
 const dateTimeToString = (date: Date) => {

@@ -6,7 +6,7 @@ type SelectTypeProps = {
   required: boolean;
   value: string;
   select: (value: string) => void;
-  options: {id: string; name: string}[]
+  options: {id: string; name: string}[];
 }
 
 const useStyles = makeStyles({

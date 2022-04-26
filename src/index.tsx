@@ -5,15 +5,19 @@ import {App} from './App'
 import reportWebVitals from './reportWebVitals'
 import { ConnectedRouter } from 'connected-react-router'
 import * as Hsitory from 'history'
+import {BrowserRouter} from 'react-router-dom'
+
 
 const history = Hsitory.createBrowserHistory()
 export const store = createStore(history)
 
 ReactDOM.render(
   <Provider store={store}>
+    <BrowserRouter>
     <ConnectedRouter history={history}>
       <App />
     </ConnectedRouter>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 )

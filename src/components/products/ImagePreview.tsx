@@ -1,6 +1,6 @@
 type ImagePreviewProps = {
-  id: string
-  path: string
+  id: string;
+  path: string;
   delete: (id: string) => Promise<boolean>
 }
 

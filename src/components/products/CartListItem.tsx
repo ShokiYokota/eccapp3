@@ -13,7 +13,7 @@ import { getUserId } from "../../reducks/users/selectors";
 import { db } from "../../firebase";
 
 type CartListItemProps = {
-  product: AddedProduct
+  product: AddedProduct;
 }
 
 const useStyles = makeStyles({

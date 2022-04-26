@@ -26,8 +26,8 @@ export const HeaderMenus = (props:any) =>{
     .collection('cart')
     .onSnapshot((snapshot)=>{
       snapshot.docChanges().forEach((change) => {
-        const product = change.doc.data() as AddedProduct
-        const changeType = change.type
+        const product = change.doc.data() as AddedProduct;
+        const changeType = change.type;
 
         switch(changeType){
           case 'added'://カートに追加
