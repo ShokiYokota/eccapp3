@@ -10,9 +10,9 @@ import {configureStore } from '@reduxjs/toolkit'
 
 
 export type AppState = {
-  router: Reducer<RouterState>
-  products: ProductsState
-  users: UserState
+  router: Reducer<RouterState>;
+  products: ProductsState;
+  users: UserState;
 }
 
 export const createStore = (history: History)=>{
