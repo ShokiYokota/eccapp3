@@ -1,8 +1,9 @@
 {
-  "name": "ec-app",
+  "name": "ecapptoolkit",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -54,7 +55,7 @@
     "html-react-parser": "^1.2.7",
     "husky": "^7.0.0",
     "prettier": "^2.3.2",
-    "react-redux": "^7.2.4",
+    "react-redux": "^7.2.8",
     "react-router": "^5.2.0",
     "redux": "^4.1.0",
     "redux-actions": "^2.6.5",

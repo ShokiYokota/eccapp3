@@ -12,5 +12,5 @@ export const App = () =>{
           <Router/>
         </main>
     </>
-  )
+  );
 }
