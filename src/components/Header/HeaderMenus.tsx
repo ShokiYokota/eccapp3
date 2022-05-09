@@ -62,6 +62,9 @@ export const HeaderMenus = (props:any) =>{
       <IconButton onClick={(event)=>props.handleDrawerToggle(event)}> 
         <MenuIcon/>
       </IconButton>
+      <a>
+        コミット１回目です。
+      </a>
     </>
   )
 }
