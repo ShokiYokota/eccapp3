@@ -1,31 +1,55 @@
-import { UserActionType, UsersStateType, UsersType } from "./types";
+import { OrderHistorytype } from "../products/types";
+import { AddedProduct,
+  FetchOrdersHistoryAction,
+  FetchProductsInCartActoin,
+  FETCH_ORDERS_HISTORY,
+  FETCH_PRODUCTS_IN_CART,
+  SignInAction,
+  SignOutAction,
+  SIGN_IN,
+  SIGN_OUT,
+  UserState,} from "./types";
 
-//Userのアクションタイプの定数
-export const ACTION_TYPE = {
-  SIGN_IN: "SIGN_IN",
-  SIGN_OUT: "SIGN_OUT"
-}as const;
+  export const fetchProductsInCartActoin = (products: AddedProduct[]):FetchProductsInCartActoin => { //AddedProduct[]は商品に関するデータ構造（（例）名前やid）を持っている
+    return { 
+      type: FETCH_PRODUCTS_IN_CART,
+      payload: products
+    }
+  }
+
+  export const fetchOrdersHistoryAction = (history: OrderHistorytype[]):FetchOrdersHistoryAction=> { //OrderHistory[]は注文したid,日時等を持っている
+    return { 
+      type: FETCH_ORDERS_HISTORY,
+      payload: history
+    }
+  }
 
 
-export const signInAction = (userState:Omit<UsersType['state'],'isSignedIn'>): UsersType['action'] => { //userState=Object型でkeyにuserIdとuserNameを持っている
+export const signInAction = (userState: UserState):SignInAction => { //userState=Object型でkeyにuserIdとuserNameを持っている
   return { 
-    type: ACTION_TYPE.SIGN_IN,
+    type: SIGN_IN,
     payload: {   //payload=データの塊
       isSignedIn: true,
-      userId: userState.userId,
-      userName: userState.userName
+      orders: userState.orders,
+      role: userState.role,
+      uid: userState.uid,
+      username: userState.username,
+      cart: userState.cart,
     }
   }
 }
 
 // TypeScriptなしの書き方⇨ export const SIGN_OUT = "SIGN_OUT";
-export const signOutAction = () :UsersType['action'] => {
+export const signOutAction = (): SignOutAction => {
   return {
-    type: ACTION_TYPE.SIGN_OUT,
+    type: SIGN_OUT,
     payload: {
-      isSignedIn: false, //初期値に戻す
-      userId: "",
-      userName: ""
-    }
+      isSignedIn: false,
+      orders: [],
+      role: '',
+      uid: '',
+      username: '',
+      cart: [],
+    },
   }
 }

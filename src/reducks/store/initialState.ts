@@ -1,9 +1,21 @@
-import { RootStateType } from "../users/types";
+import { ProductsState } from "../products/types";
+import { UserState } from "../users/types";
 
-export const initialState : RootStateType = {
+type InitialState = {
+  products: ProductsState;
+  users: UserState;
+}
+
+export const initialState : InitialState = {
+    products: {
+      list: []
+    },
     users: {
+    cart:[],
     isSignedIn: false,  //サインインしているかどうか　
-    userId: "",          //numberなら初期値０でいい？
-    userName: ""
+    role: "",
+    uid: "",          //numberなら初期値０でいい？
+    username: "",
+    orders: []
   }
 }

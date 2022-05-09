@@ -1,15 +1,24 @@
-import React from "react";
-import {Route,Routes} from "react-router";
-import {Login,Home} from "./pages/index";
-import { BrowserRouter } from "react-router-dom";
+import {Route,Switch} from "react-router";
+import {SignIn,SignUp,Reset,ProductEdit,ProductList,ProductDetail,OrderConfirm,OrderHistory} from "./pages/Index";
+import { Auth } from "./Auth";
+import { CartList } from "./pages/CartList";
 
-export const Router = () => {
+
+export const Router = (): JSX.Element => {
   return (
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-    </Routes>
-  </BrowserRouter>
+    <Switch>
+      <Route exact path={'/signup'} component={SignUp} />
+      <Route exact path={'/signin'} component={SignIn} />
+      <Route exact path={'/signin/reset'} component={Reset} />
+       
+      <Auth>
+        <Route exact path={'(/)?'} component={ProductList} />
+        <Route exact path="/product/detail/:id" component={ProductDetail} />
+        <Route path="/product/edit(/:id)?" component={ProductEdit} />
+        <Route exact path="/cart" component={CartList} />
+        <Route exact path="/order/confirm" component={OrderConfirm} />
+        <Route exact path="/order/history" component={OrderHistory} />
+      </Auth>
+    </Switch>
   )
 }

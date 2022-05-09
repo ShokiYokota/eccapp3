@@ -1,17 +1,20 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { getUserId,getUserName} from "../reducks/users/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "../reducks/store/store";
+import { signOut } from "../reducks/users/operations";
+import { getUserId,getUsername} from "../reducks/users/selectors";
 
-export const Home : React.FC = () =>{
-  const selector = useSelector(state => state);//<RootStateType, RootStateType>(state => state);
-  const userId = getUserId(selector);
-  const userName = getUserName(selector);
+export const Home = () =>{
+  const dispatch = useDispatch();
+  const selector = useSelector((state:AppState)=>state)
+  const username = getUsername(selector)
+  const uid = getUserId(selector)
 
   return (
-    <>
+    <div>
      Homeです
-     <p>ユーザID:{userId}</p>
-     <p>ユーザー名:{userName}</p>
-    </>
+     <p>ユーザID:{uid}</p>
+     <p>ユーザー名:{username}</p>
+     <button type="button" onClick={() => dispatch(signOut())}>サインアウト</button>
+    </div>
   )
 }
