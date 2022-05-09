@@ -63,7 +63,7 @@ export const HeaderMenus = (props:any) =>{
         <MenuIcon/>
       </IconButton>
       <a>
-        コミット１回目です。
+        コミット一回目です。
       </a>
     </>
   )
